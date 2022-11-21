@@ -1,0 +1,26 @@
+1-- Find total population of all the countries in Eastern Europe Region
+Answer- db.jsonArray.find([{ $group:{_id:"$Region",total:{$sum:"$Population" }}},{$match:{_id:"EASTERN EUROPE"}} ]  )      
+ans :- [ { _id: 'EASTERN EUROPE', total: 119914717 } ]
+
+2-- Find Average population per country in All regions
+Answer- db.jsonArray.find([{$group:{_id:"$Country",avg:{$avg:"$Population"  }} } ]  )
+
+3-- Find Average birth rate of entire world
+Answer- db.jsonArray.find([{$group:{_id:"$Birthrate",avg} } ]  )
+
+4-- Find all the countries, sort them by GDP ascending, population descending, take top 10 countries out
+
+5-- Find all the countries Birthrate lower than 20, group them by region, find lowest birthrate region.
+
+6-- Find sum of population according to region
+Answer- db.jsonArray.find([{$group: {_id: "$Region", totPop:{$sum: "$Population"}}}])
+
+7-- Find average birthrate according to region, sort them by low birthrate first.
+Answer- db.jsonArray.find([{$group: {_id: "$Region", avgbirthRate:{$avg: "$Birthrate"}}},{$sort:{avgbirthRate:1}}])
+
+8-- Sort all countries by population descending, get 11 to 20 position countries from these.
+Answer- db.jsonArray.find([ {$sort:{Population:-1}},{$limit:20},{$sort:{Population:1}},{$limit:10},{$sort:{Population:-1}}])
+
+9-- Write an update query for: find all the countries with phones per thousand greater than 400, set it to 1000.
+
+10-- Write an update query for: replace all the countries Climate to 0.
